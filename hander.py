@@ -20,8 +20,8 @@ def start(folder_path, computeType, modelSize="medium"):
     # Run on GPU with FP16
     model = WhisperModel(model_size, device="cuda", compute_type=computeType)
     result_array1, result_array2 = walkFiles(folder_path)
-    for videoPath, srtPath, srtSourcePath in zip(result_array1, result_array2):
-        create(videoPath, srtPath, srtSourcePath, model)
+    for videoPath, srtPath in zip(result_array1, result_array2):
+        create(videoPath, srtPath, model)
 
 
 def walkFiles(folder_path):
