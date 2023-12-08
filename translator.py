@@ -1,11 +1,13 @@
 from googletranslatepy import Translator
 
-translator: Translator
+trans: Translator
+
 
 def init(proxy=""):
-    print("使用代理："+proxy)
-    translator = Translator(proxies=proxy)
+    global trans  # Use the global 'trans' variable
+    print("使用代理：" + proxy)
+    trans = Translator(proxies=proxy)
 
 
 def handler(text):
-    return translator.translate(text, dest="zh-cn")
+    return trans.translate(text, dest="zh-cn")
