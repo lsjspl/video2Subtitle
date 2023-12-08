@@ -19,28 +19,30 @@ def start(folder_path, computeType, modelSize="medium"):
     print(f"加载{model_size}。。。。")
     # Run on GPU with FP16
     model = WhisperModel(model_size, device="cuda", compute_type=computeType)
-    result_array1, result_array2 = walkFiles(folder_path)
-    for videoPath, srtPath in zip(result_array1, result_array2):
-        create(videoPath, srtPath, model)
+    result_array1, result_array2, result_array3 = walkFiles(folder_path)
+    for videoPath, srtPath, srtSourcePath in zip(result_array1, result_array2, result_array3):
+        create(videoPath, srtPath, srtSourcePath, model)
 
 
 def walkFiles(folder_path):
     videoPaths = list()
     srtPaths = list()
+    srtSourcePaths = list()
     for root, dirs, files in os.walk(folder_path):
         for file_name in files:
             videoPath = os.path.join(root, file_name)
             if videoPath.lower().endswith(".mp4"):
                 srtPath = os.path.join(root, os.path.splitext(os.path.basename(videoPath))[0] + ".srt")
+                srtSourcePath = os.path.join(root, os.path.splitext(os.path.basename(videoPath))[0] + "_en.srt")
                 if os.path.exists(srtPath):
                     print("跳过" + srtPath)
                     continue
                 videoPaths.append(videoPath)
                 srtPaths.append(srtPath)
-    return videoPaths, srtPaths
+    return videoPaths, srtPaths, srtSourcePaths
 
 
-def create(videoPath, srtPath, model):
+def create(videoPath, srtPath, srtSourcePath, model):
     segments, info = model.transcribe(
         audio=videoPath,
         beam_size=5,
@@ -61,12 +63,17 @@ def create(videoPath, srtPath, model):
     times = []
     index = 0
 
-    for segment in segments:
-        print(segment.text)
-        texts.append(segment.text)
-        index = index + 1
-        time = f"{index}\n{segment.start} --> {segment.end}"
-        times.append(time)
+    if os.path.exists(srtSourcePath):
+        os.remove(srtSourcePath)
+
+    with open(srtSourcePath, 'w', encoding='utf-8') as file:
+        for segment in segments:
+            print(segment.text)
+            texts.append(segment.text)
+            index = index + 1
+            time = f"{index}\n{segment.start} --> {segment.end}"
+            times.append(time)
+            file.write(f"{time}\n{segment.text}\n\n")
 
     results = translator.handler("|||".join(texts))
     print("|||".join(texts))
