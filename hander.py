@@ -71,7 +71,7 @@ def create(videoPath, srtPath, srtSourcePath, model):
             print(segment.text)
             texts.append(segment.text)
             index = index + 1
-            time = f"{index}\n{segment.start} --> {segment.end}"
+            time = f"{index}\n{seconds_to_srt_time(segment.start)} --> {seconds_to_srt_time(segment.end)}"
             times.append(time)
             file.write(f"{time}\n{segment.text}\n\n")
 
@@ -87,3 +87,11 @@ def create(videoPath, srtPath, srtSourcePath, model):
             file.write(f"{time}\n{result}\n\n")
 
     os.rename(tmp, srtPath)
+
+
+def seconds_to_srt_time(seconds):
+    milliseconds = int(seconds * 1000)
+    hours, milliseconds = divmod(milliseconds, 3600000)
+    minutes, milliseconds = divmod(milliseconds, 60000)
+    seconds, milliseconds = divmod(milliseconds, 1000)
+    return "{:02d}:{:02d}:{:02d},{:03d}".format(hours, minutes, seconds, milliseconds)
