@@ -19,30 +19,29 @@ def start(folder_path, computeType, modelSize="medium"):
     print(f"加载{model_size}。。。。")
     # Run on GPU with FP16
     model = WhisperModel(model_size, device="cuda", compute_type=computeType)
-    result_array1, result_array2, result_array3 = walkFiles(folder_path)
-    for videoPath, srtPath, srtSourcePath in zip(result_array1, result_array2, result_array3):
+    result_array1, result_array2 = walkFiles(folder_path)
+    for videoPath, srtPath, srtSourcePath in zip(result_array1, result_array2):
         create(videoPath, srtPath, srtSourcePath, model)
 
 
 def walkFiles(folder_path):
     videoPaths = list()
     srtPaths = list()
-    srtSourcePaths = list()
     for root, dirs, files in os.walk(folder_path):
         for file_name in files:
             videoPath = os.path.join(root, file_name)
             if videoPath.lower().endswith(".mp4"):
                 srtPath = os.path.join(root, os.path.splitext(os.path.basename(videoPath))[0] + ".srt")
-                srtSourcePath = os.path.join(root, os.path.splitext(os.path.basename(videoPath))[0] + "_en.srt")
+
                 if os.path.exists(srtPath):
                     print("跳过" + srtPath)
                     continue
                 videoPaths.append(videoPath)
                 srtPaths.append(srtPath)
-    return videoPaths, srtPaths, srtSourcePaths
+    return videoPaths, srtPaths
 
 
-def create(videoPath, srtPath, srtSourcePath, model):
+def create(videoPath, srtPath, model):
     segments, info = model.transcribe(
         audio=videoPath,
         beam_size=5,
@@ -53,6 +52,7 @@ def create(videoPath, srtPath, srtSourcePath, model):
         vad_filter=True,
         temperature=0,
     )
+    srtSourcePath = os.path.join(os.path.dirname(srtPath), os.path.splitext(os.path.basename(videoPath))[0]+"_" + info.language_probability+".srt")
     print("Detected language '%s' with probability %f" % (info.language, info.language_probability))
     print(videoPath)
     print(srtPath)
