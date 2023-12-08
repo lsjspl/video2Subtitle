@@ -52,11 +52,12 @@ def create(videoPath, srtPath, model):
         vad_filter=True,
         temperature=0,
     )
-    srtSourcePath = os.path.join(os.path.dirname(srtPath), os.path.splitext(os.path.basename(videoPath))[0]+"_" + info.language_probability+".srt")
+
     print("Detected language '%s' with probability %f" % (info.language, info.language_probability))
     print(videoPath)
     print(srtPath)
 
+    srtSourcePath = os.path.join(os.path.dirname(srtPath), f"{os.path.splitext(os.path.basename(videoPath))[0]}_{info.language}.srt")
     tmp = os.path.join(os.path.dirname(srtPath), "tmp.srt")
 
     texts = []
