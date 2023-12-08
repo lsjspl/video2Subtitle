@@ -2,6 +2,8 @@ import os
 
 from faster_whisper import WhisperModel
 import logging
+import translator
+import pickle
 
 
 # or run on GPU with INT8
@@ -12,6 +14,7 @@ def start(folder_path, computeType):
     logging.basicConfig()
     logging.getLogger("faster_whisper").setLevel(logging.DEBUG)
     # model_size = "large-v3"
+    # model_size = "medium"
     model_size = "medium"
     print(f"加载{model_size}。。。。")
     # Run on GPU with FP16
@@ -30,7 +33,7 @@ def walkFiles(folder_path):
             if videoPath.lower().endswith(".mp4"):
                 srtPath = os.path.join(root, os.path.splitext(os.path.basename(videoPath))[0] + ".srt")
                 if os.path.exists(srtPath):
-                    print("跳过"+srtPath)
+                    print("跳过" + srtPath)
                     continue
                 videoPaths.append(videoPath)
                 srtPaths.append(srtPath)
@@ -43,28 +46,38 @@ def create(videoPath, srtPath, model):
         beam_size=5,
         # language="zh",
         # initial_prompt="简体",
-        # vad_parameters=dict(min_silence_duration_ms=500) ,
+        vad_parameters=dict(min_silence_duration_ms=500),
         condition_on_previous_text=True,
         vad_filter=True,
-        suppress_tokens = [],
         temperature=0,
     )
     print("Detected language '%s' with probability %f" % (info.language, info.language_probability))
     print(videoPath)
     print(srtPath)
 
+    tmp = os.path.join(os.path.dirname(srtPath), "tmp.srt")
+
+    texts = []
+    times = []
+    index = 0
+
+    for segment in segments:
+        print(segment.text)
+        texts.append(segment.text)
+        index = index + 1
+        time = f"{index}\n{segment.start} --> {segment.end}"
+        times.append(time)
 
 
-    tmp=os.path.join(os.path.dirname(srtPath),"tmp.srt")
+    results = translator.handler("|||".join(texts))
+    print("|||".join(texts))
+    print(results)
+
     if os.path.exists(tmp):
         os.remove(tmp)
-    index = 0
+
     with open(tmp, 'w', encoding='utf-8') as file:
-        for segment in segments:
-            index = index + 1
-            text = segment.text
-            content = "[%.2fs -> %.2fs] %s" % (segment.start, segment.end, text)
-            print(content)
-            file.write(f"{index}\n{segment.start} --> {segment.end}\n{text}\n\n")
+        for time, text, result in zip(times, texts, results.split("|||")):
+            file.write(f"{time}\n{result}\n\n")
 
     os.rename(tmp, srtPath)
