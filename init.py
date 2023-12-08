@@ -1,4 +1,6 @@
-# 创建虚拟环境
 import hander
+import translator
 
-hander.start(f"D:\Mr5\Downloads\【教程】Blender ：超写实角色\第1章", "float32")
+
+translator.init(proxy="http://127.0.0.1:10809")
+hander.start(f"D:\Mr5\Downloads\【教程】Blender ：超写实角色", "float32","medium")

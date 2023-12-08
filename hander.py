@@ -10,12 +10,12 @@ import pickle
 # model = WhisperModel(model_size, device="cuda", compute_type="int8_float16")
 # or run on CPU with INT8
 # model = WhisperModel(model_size, device="cpu", compute_type="int8")
-def start(folder_path, computeType):
+def start(folder_path, computeType, modelSize="medium"):
     logging.basicConfig()
     logging.getLogger("faster_whisper").setLevel(logging.DEBUG)
     # model_size = "large-v3"
     # model_size = "medium"
-    model_size = "medium"
+    model_size = modelSize
     print(f"加载{model_size}。。。。")
     # Run on GPU with FP16
     model = WhisperModel(model_size, device="cuda", compute_type=computeType)
@@ -27,7 +27,7 @@ def start(folder_path, computeType):
 def walkFiles(folder_path):
     videoPaths = list()
     srtPaths = list()
-    for root, dirs, files in os.walk(folder_path, topdown=False):
+    for root, dirs, files in os.walk(folder_path):
         for file_name in files:
             videoPath = os.path.join(root, file_name)
             if videoPath.lower().endswith(".mp4"):
@@ -67,7 +67,6 @@ def create(videoPath, srtPath, model):
         index = index + 1
         time = f"{index}\n{segment.start} --> {segment.end}"
         times.append(time)
-
 
     results = translator.handler("|||".join(texts))
     print("|||".join(texts))
