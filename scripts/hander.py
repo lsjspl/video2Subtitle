@@ -3,7 +3,6 @@ import os
 from faster_whisper import WhisperModel
 import logging
 import translator
-import pickle
 
 
 # or run on GPU with INT8
