@@ -2,7 +2,7 @@ import os
 
 from faster_whisper import WhisperModel
 import logging
-import translator
+from scripts import translator
 
 
 # or run on GPU with INT8
@@ -56,7 +56,8 @@ def create(videoPath, srtPath, model):
     print(videoPath)
     print(srtPath)
 
-    srtSourcePath = os.path.join(os.path.dirname(srtPath), f"{os.path.splitext(os.path.basename(videoPath))[0]}_{info.language}.srt")
+    srtSourcePath = os.path.join(os.path.dirname(srtPath),
+                                 f"{os.path.splitext(os.path.basename(videoPath))[0]}_{info.language}.srt")
     tmp = os.path.join(os.path.dirname(srtPath), "tmp.srt")
 
     texts = []

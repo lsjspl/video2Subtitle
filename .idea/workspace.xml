@@ -7,7 +7,9 @@
     <list default="true" id="42328ec3-a0a9-490d-ac07-96428b083660" name="Changes" comment="init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/init.py" beforeDir="false" afterPath="$PROJECT_DIR$/init.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translator.py" beforeDir="false" afterPath="$PROJECT_DIR$/translator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/hander.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/hander.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/translator.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/translator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/translatorFileName.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/translatorFileName.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,12 +96,13 @@
       <recent name="D:\Mr5\OneDrive\Desktop\IDEAProject\video2Subtitle\model" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Mr5\OneDrive\Desktop\IDEAProject\video2Subtitle\scripts" />
       <recent name="D:\Mr5\OneDrive\Desktop\IDEAProject\video2Subtitle\googletrans" />
       <recent name="D:\Mr5\OneDrive\Desktop\IDEAProject\video2Subtitle\model" />
       <recent name="D:\Mr5\OneDrive\Desktop\IDEAProject\video2Subtitle" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Python.start">
     <configuration name="start" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="video2Subtitle" />
       <option name="ENV_FILES" value="" />
@@ -161,7 +164,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/translator.py" />
+      <option name="SCRIPT_NAME" value="D:\Mr5\OneDrive\Desktop\IDEAProject\video2Subtitle\scripts\translator.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -177,9 +180,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.start" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.translator" />
-        <item itemvalue="Python.start" />
       </list>
     </recent_temporary>
   </component>
@@ -218,7 +221,7 @@
       <workItem from="1702091839890" duration="6344000" />
       <workItem from="1702098364041" duration="2101000" />
       <workItem from="1702101934279" duration="2912000" />
-      <workItem from="1702105417887" duration="213000" />
+      <workItem from="1702105417887" duration="1015000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -324,7 +327,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702098613700</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="init">
+      <option name="closed" value="true" />
+      <created>1702105777845</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1702105777845</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,8 +351,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/video2Subtitle$hander.coverage" NAME="hander Coverage Results" MODIFIED="1702042325430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/video2Subtitle$start.coverage" NAME="start Coverage Results" MODIFIED="1702062706409" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/video2Subtitle$test.coverage" NAME="test Coverage Results" MODIFIED="1702104857269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/video2Subtitle$start.coverage" NAME="start Coverage Results" MODIFIED="1702106185281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/video2Subtitle$aa.coverage" NAME="aa Coverage Results" MODIFIED="1701951040425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/video2Subtitle$init.coverage" NAME="init Coverage Results" MODIFIED="1701966200311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/video2Subtitle$translate__1_.coverage" NAME="translate (1) Coverage Results" MODIFIED="1702037113755" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

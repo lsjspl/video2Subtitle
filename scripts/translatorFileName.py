@@ -1,6 +1,6 @@
 import os
 
-import translator
+from scripts import translator
 
 
 def handler(path):

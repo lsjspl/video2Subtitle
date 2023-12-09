@@ -13,11 +13,9 @@ def init(proxy=""):
 def handler(text):
     results = split_string_with_delimiter(text)
     texts = []
-    print(results)
     for result in results:
         texts.append(trans.translate(result, dest="zh-cn"))
 
-    # print(texts)
     return delimiter.join(texts).replace("；", delimiter)
 
 
