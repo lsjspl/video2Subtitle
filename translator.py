@@ -1,6 +1,7 @@
 from googletranslatepy import Translator
 
 trans: Translator
+delimiter = ";"
 
 
 def init(proxy=""):
@@ -15,10 +16,10 @@ def handler(text):
     for result in results:
         texts.append(trans.translate(result, dest="zh-cn"))
 
-    return "|||".join(texts)
+    return delimiter.join(texts)
 
 
-def split_string_with_delimiter(input_str, delimiter="|||", max_length=5000):
+def split_string_with_delimiter(input_str, max_length=5000):
     """
     将输入字符串按照指定的分隔符分割，每段不超过指定长度
     """

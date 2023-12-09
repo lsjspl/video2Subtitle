@@ -76,15 +76,15 @@ def create(videoPath, srtPath, model):
             times.append(time)
             file.write(f"{time}\n{segment.text}\n\n")
 
-    results = translator.handler("|||".join(texts))
-    print("|||".join(texts))
+    results = translator.handler(translator.delimiter.join(texts))
+    print(translator.delimiter.join(texts))
     print(results)
 
     if os.path.exists(tmp):
         os.remove(tmp)
 
     with open(tmp, 'w', encoding='utf-8') as file:
-        for time, text, result in zip(times, texts, results.split("|||")):
+        for time, text, result in zip(times, texts, results.split(translator.delimiter)):
             file.write(f"{time}\n{result}\n\n")
 
     os.rename(tmp, srtPath)
